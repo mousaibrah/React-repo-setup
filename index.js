@@ -6,42 +6,55 @@ const inquirer = require('inquirer');
 
 // Define the paths to the React and Next.js templates
 const templates = {
-  react: path.join(__dirname, 'template-react'),
-  next: path.join(__dirname, 'template-next')
+    react: path.join(__dirname, 'template-react'),
+    next: path.join(__dirname, 'template-next')
 };
 
 // Prompt the user for setup choice
 async function setupProject() {
-  try {
-    const answers = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'framework',
-        message: 'Choose the setup you want to use:',
-        choices: ['React', 'Next.js']
-      }
-    ]);
+    try {
+        // Ask for the project name if not provided as a command line argument
+        const projectNameArg = process.argv[2];
 
-    const projectName = process.argv[2] || 'my-project';
-    const targetDir = path.join(process.cwd(), projectName);
-    const selectedTemplate = answers.framework.toLowerCase();  // 'react' or 'next'
+        // If no project name is passed, ask for it interactively
+        const { projectName } = await inquirer?.default.prompt([
+            {
+                type: 'input',
+                name: 'projectName',
+                message: 'Enter the project name:',
+                default: projectNameArg || 'my-project'
+            }
+        ]);
 
-    console.log(`Creating ${selectedTemplate} project in ${targetDir}...`);
+        // Ask the user for the framework setup (React or Next)
+        const answers = await inquirer?.default.prompt([
+            {
+                type: 'list',
+                name: 'framework',
+                message: 'Choose the setup you want to use:',
+                choices: ['React', 'Next']
+            }
+        ]);
 
-    // Check if the selected template exists
-    if (!templates[selectedTemplate]) {
-      console.error(`Template for ${selectedTemplate} not found!`);
-      return;
+        const targetDir = path.join(process.cwd(), projectName);
+        const selectedTemplate = answers.framework.toLowerCase();  // 'react' or 'next'
+
+        console.log(`Creating ${selectedTemplate} project in ${targetDir}...`);
+
+        // Check if the selected template exists
+        if (!templates[selectedTemplate]) {
+            console.error(`Template for ${selectedTemplate} not found!`);
+            return;
+        }
+
+        // Copy the selected template to the target directory
+        execSync(`cp -r ${templates[selectedTemplate]} ${targetDir}`);
+
+        // Provide post-setup instructions
+        console.log(`Project created. Navigate to ${projectName} and run 'yarn install' or 'npm install'.`);
+    } catch (error) {
+        console.error('Error during setup:', error);
     }
-
-    // Copy the selected template to the target directory
-    execSync(`cp -r ${templates[selectedTemplate]} ${targetDir}`);
-
-    // Provide post-setup instructions
-    console.log(`Project created. Navigate to ${projectName} and run 'yarn install' or 'npm install'.`);
-  } catch (error) {
-    console.error('Error during setup:', error);
-  }
 }
 
 // Call the function to start the setup process
