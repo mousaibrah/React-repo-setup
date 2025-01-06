@@ -1,0 +1,15 @@
+{
+  "locale": "{locale}",
+  "title": "Title",
+  "label": "Label",
+  "IndexPage": {
+    "title": "Home Page",
+    "description": "This is the home page"
+  },
+  "About": "About",
+  "description": "This is the about page",
+  "Contact": "Contact",
+  "href": "href",
+  "Errrrrrror": "Error",
+  "name": "Name"
+}

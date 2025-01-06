@@ -3,5 +3,8 @@
     "version": "1.0.4",
     "bin": {
         "create-react-setup": "./index.js"
+    },
+    "dependencies": {
+        "inquirer": "^12.3.0"
     }
 }

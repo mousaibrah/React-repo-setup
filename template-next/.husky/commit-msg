@@ -1,0 +1,18 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run commitlint to check commit message
+yarn commitlint --edit "$1"
+if [ $? -ne 0 ]; then
+  echo "❌ Commit message validation failed."
+  exit 1
+fi
+
+# Run yarn build to check for build errors
+yarn build
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed. Commit aborted."
+  exit 1
+fi
+
+echo "✅ Commit message validated and build successful."
