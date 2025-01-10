@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
 const path = require('path');
 const inquirer = require('inquirer');
 const fs = require('fs');
+const fsExtra = require('fs-extra'); // Ensure this is added to your dependencies
 
 // Define the paths to the React and Next.js templates
 const templates = {
     react: path.join(__dirname, 'template-react'),
-    next: path.join(__dirname, 'template-next')
+    next: path.join(__dirname, 'template-next'),
 };
 
 // Prompt the user for setup choice
@@ -49,7 +49,9 @@ async function setupProject() {
         }
 
         // Copy the selected template to the target directory
-        execSync(`cp -r ${templates[selectedTemplate]} ${targetDir}`);
+        await fsExtra.copy(templates[selectedTemplate], targetDir);
+        console.log(`Template files copied successfully.`);
+
         // Update the package.json file
         const packageJsonPath = path.join(targetDir, 'package.json');
         if (fs.existsSync(packageJsonPath)) {

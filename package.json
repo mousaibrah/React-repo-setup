@@ -5,6 +5,7 @@
         "create-react-setup": "./index.js"
     },
     "dependencies": {
+        "fs-extra": "^11.2.0",
         "inquirer": "^12.3.0"
     }
 }
