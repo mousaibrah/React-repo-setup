@@ -3,6 +3,7 @@
 const { execSync } = require('child_process');
 const path = require('path');
 const inquirer = require('inquirer');
+const fs = require('fs');
 
 // Define the paths to the React and Next.js templates
 const templates = {
@@ -49,6 +50,15 @@ async function setupProject() {
 
         // Copy the selected template to the target directory
         execSync(`cp -r ${templates[selectedTemplate]} ${targetDir}`);
+        // Update the package.json file
+        const packageJsonPath = path.join(targetDir, 'package.json');
+        if (fs.existsSync(packageJsonPath)) {
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            packageJson.name = projectName; // Update the name
+            fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+        } else {
+            console.error('package.json not found in the template!');
+        }
 
         // Provide post-setup instructions
         console.log(`Project created. Navigate to ${projectName} and run 'yarn install' or 'npm install'.`);
