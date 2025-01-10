@@ -1,6 +1,6 @@
 {
     "name": "create-react-setup",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "bin": {
         "create-react-setup": "./index.js"
     },
