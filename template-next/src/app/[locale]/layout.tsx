@@ -1,4 +1,4 @@
-import BaseLayout from '@/Components/BaseLayout';
+import { BaseLayout } from '@/Components/Layouts';
 import { Locale, routing } from '@/i18n/routing';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -13,12 +13,11 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Omit<Props, 'children'>) {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-
   return {
-    title: t('title'),
+    title: t('Title'),
   };
 }
 

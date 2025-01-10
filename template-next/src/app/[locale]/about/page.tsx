@@ -1,9 +1,17 @@
-import PageLayout from '@/Components/PageLayout';
+import { PageLayout } from '@/Components/Layouts';
+import { setRequestLocale } from 'next-intl/server';
 
-const About = () => (
-  <PageLayout title={'About'}>
-    <div>About</div>
-  </PageLayout>
-);
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+export default async function PathnamesPage({ params }: Props) {
+  const { locale } = await params;
 
-export default About;
+  // Enable static rendering
+  setRequestLocale(locale);
+  return (
+    <PageLayout title={undefined}>
+      <div>About</div>
+    </PageLayout>
+  );
+}

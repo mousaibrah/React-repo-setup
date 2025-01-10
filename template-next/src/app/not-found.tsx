@@ -1,4 +1,4 @@
-import BaseLayout from '@/Components/BaseLayout';
+import { BaseLayout } from '@/Components/Layouts';
 import { routing } from '@/i18n/routing';
 import NotFoundPage from '../Components/NotFoundPage';
 

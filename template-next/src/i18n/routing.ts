@@ -7,11 +7,11 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
     '/about': '/about',
+    //  Add pathnames here example: '/about': '/about',
   },
 });
 
 export type Pathnames = keyof typeof routing.pathnames;
 export type Locale = (typeof routing.locales)[number];
 
-export const { Link, getPathname, redirect, usePathname, useRouter } =
-  createNavigation(routing);
+export const { Link, getPathname, redirect, usePathname, useRouter } = createNavigation(routing);
