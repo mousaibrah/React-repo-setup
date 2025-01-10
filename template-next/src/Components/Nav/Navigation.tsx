@@ -5,7 +5,7 @@ import ThemeToggle from './Settings/ThemeToggle';
 
 export function Navigation() {
   return (
-    <nav className="px-[3%] flex flex-row justify-between items-center fixed top-12 z-50 h-24 w-full bg-primary">
+    <nav className="px-[3%] flex flex-row justify-between items-center fixed top-0 z-50 h-24 w-full bg-primary">
       <Link href="/" className="text-white">
         logo
       </Link>

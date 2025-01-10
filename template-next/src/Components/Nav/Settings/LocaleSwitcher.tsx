@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
           handleSwitchLanguage('en');
         }}
       >
-        <Image src={`/assets/icons/English.png`} alt="English" width={20} height={20} sizes="(max-width: 768px) 20px, 40px" /> English
+        <Image src={`/assets/icons/English_Icon.svg`} alt="English" width={20} height={20} sizes="(max-width: 768px) 20px, 40px" /> English
       </button>
       <div>
         <span>|</span>
@@ -39,7 +39,7 @@ export default function LocaleSwitcher() {
           handleSwitchLanguage('ar');
         }}
       >
-        <Image src={`/assets/icons/Arabic.png`} alt="Arabic" width={20} height={20} sizes="(max-width: 768px) 20px, 40px" />
+        <Image src={`/assets/icons/Arabic_Icon.svg`} alt="Arabic" width={20} height={20} sizes="(max-width: 768px) 20px, 40px" />
         العربية
       </button>
     </div>
